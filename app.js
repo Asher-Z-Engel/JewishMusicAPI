@@ -31,5 +31,8 @@ app.get('/api/albums/:albumID', (req, res) => {
   }
   res.status(200).json(requestedAlbum)
 })
+app.all('*', (req, res) => {
+  res.status(404).send('<h1>Sorry, we can not find what you are looking for</h1>')
+})
 
 app.listen(5000, () => console.log('JM API is listening on port 5000'))
