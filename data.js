@@ -22,6 +22,14 @@ const albums = [
     year: 2015,
     genre: 'classic',
     tracks: 8
+  },
+  {
+    id: 4,
+    name: 'Those Were the Days',
+    artist: 'Avraham Fried',
+    year: 2020,
+    genre: 'classic',
+    tracks: 10
   }
 ]
 
