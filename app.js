@@ -4,9 +4,12 @@ const app = express()
 // const albums = require('./data')
 // routes
 const albums = require('./routes/albums')
+// DB
+const { connectDB } = require('./db/connect')
 
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+require('dotenv').config()
 
 app.use('/api/v1/albums', albums)
 
@@ -42,4 +45,15 @@ app.all('*', (req, res) => {
   res.status(404).send('<h1>Sorry, we can not find what you are looking for</h1>')
 })
 
-app.listen(5000, () => console.log('JM API is listening on port 5000'))
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI)
+      .then(() => console.log('Connected to the DB'))
+      .catch(err => console.log(err))
+    app.listen(5000, () => console.log('JM API is listening on port 5000'))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+start()
